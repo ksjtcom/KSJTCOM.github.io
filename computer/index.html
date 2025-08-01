@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript计算器</title>
+    <style>
+        /* 样式代码 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font: 18px Arial, sans-serif;
+        }
+        html {
+            height: 100%;
+            background-color: #ddd;
+        }
+        #big {
+            margin: 15px auto;
+            width: 400px;
+            height: 620px;
+            background-color: black;
+            border: 1px solid black;
+            padding: 15px;
+        }
+        .top1{margin-top: -16px;
+            margin-left: -16px;}
+        #top {
+            height: 40px;
+            background-color: gray;
+            width: 400px;
+        }
+        #title {
+            float: left;
+            line-height: 30px;
+        }
+        #author {
+            float: right;
+            line-height: 30px;
+        }
+        #import {
+            margin-top: 15px;
+        }
+        #dataname {
+            margin-top: 10px;
+            width: 400px;
+            height: 80px;
+            text-align: right;
+            font-size: 80px;
+            font-weight: bold;
+            background-color: black;
+            border: 0px;
+            color: white;
+        }
+        #key {
+            height: 293px;
+            margin-top: 25px;
+            padding: 16px;
+        }
+        .buttons {
+            border-radius: 50%;
+            float: left;
+            width: 70px;
+            height: 70px;
+            text-align: center;
+            background-color:white;
+            margin: 0 18px 20px 0;
+            border: 0px;
+        } 
+        .butt{
+            border-radius:50px;
+            float: left;
+            width: 160px;
+            text-align: center;
+            background-color:white;
+            margin: 0 18px 20px 0;
+            height: 70px;
+            border: 0;
+        }
+        
+        .buttons:hover {
+            color: black;
+            border: 0;
+
+        }
+        .b1:hover{background-image: radial-gradient(circle,rgb(207, 195, 195),#e6e4e1);transform: scale(1.05); filter: brightness(1.1);}
+        .b2:hover{background-image: radial-gradient(circle,black,#F5870B);transform: scale(1.2); filter: brightness(1.1);}
+        .b3:hover{background-image: radial-gradient(circle,black,rgb(175, 171, 171));transform: scale(1.05); filter: brightness(1.1);}
+
+        #bottom {
+            margin-top: 20px;
+            height: 20px;
+            text-align: center;
+        }
+        .bg1{background-color: red;}
+        .bg2{background-color: yellow;color:black;}
+        .bg3{background-color: green;}
+        .light{margin-top:10px ;margin-left: 10px;width: 15px;height: 15px; display: inline-block;border-radius: 50%;}
+    </style>
+</head>
+<body>
+    <div id="big">
+        <div id="top" class="top1">
+            <div class="light bg1"></div>
+            <div class="light bg2"></div>
+            <div class="light bg3"></div>
+        </div>
+        <div id="import">
+            <div id="data"><input type="text" id="dataname"  class="top1" ></div>
+        </div>
+        <div id="key">
+            <input type="button" id="CE" onclick="clearnum()" value="AC" class="buttons ">
+            <input type="button" id="C" onclick="clearnum()" value="+/-" class="buttons ">
+            <input type="button" id="Back" onclick="back()" value="%" class="buttons b3">
+            <input type="button" id="/" onclick="calc(this.id)" value="/" class="buttons bg2" style="margin-right:0px">
+            <input type="button" id="7" onclick="calc(this.id)" value="7" class="buttons b2">
+            <input type="button" id="8" onclick="calc(this.id)" value="8" class="buttons b2">
+            <input type="button" id="9" onclick="calc(this.id)" value="9" class="buttons b2">
+            <input type="button" id="*" onclick="calc(this.id)" value="*" class="buttons bg2" style="margin-right:0px">
+            <input type="button" id="4" onclick="calc(this.id)" value="4" class="buttons ">
+            <input type="button" id="5" onclick="calc(this.id)" value="5" class="buttons">
+            <input type="button" id="6" onclick="calc(this.id)" value="6" class="buttons">
+            <input type="button" id="-" onclick="calc(this.id)" value="-" class="buttons bg2" style="margin-right:0px">
+            <input type="button" id="1" onclick="calc(this.id)" value="1" class="buttons">
+            <input type="button" id="2" onclick="calc(this.id)" value="2" class="buttons">
+            <input type="button" id="3" onclick="calc(this.id)" value="3" class="buttons">
+            <input type="button" id="+" onclick="calc(this.id)" value="+" class="buttons bg2" style="margin-right:0px">
+            <input type="button" id="0" onclick="calc(this.id)" value="0" class="butt">
+            <input type="button" id="." onclick="calc(this.id)" value="." class="buttons">
+            <input type="button" id="=" onclick="eva()" value="=" class="buttons bg2" style="margin-right:0px">
+        </div>
+    </div>
+    <script>
+        var number = 0; 
+        function calc(number) {
+            if (number == "%") {
+                document.getElementById('dataname').value = Math.round(document.getElementById('dataname').value) / 100;
+            } else {
+                document.getElementById('dataname').value += document.getElementById(number).value;
+            }
+        }
+
+        function eva() {
+            document.getElementById("dataname").value = eval(document.getElementById("dataname").value);
+        }
+
+        function clearnum() {
+            // 清零
+            document.getElementById("dataname").value = null;
+            document.getElementById("dataname").focus();
+        }
+
+        function back() {
+            // 退格
+            var arr = document.getElementById("dataname");
+            arr.value = arr.value.substring(0, arr.value.length - 1);
+        }
+    </script>
+</body>
+</html>
