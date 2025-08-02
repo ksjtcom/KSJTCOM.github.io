@@ -7,19 +7,29 @@
         </head>
         <style>
             #id1{margin: 0 auto; width: 300px;}
+            .ctrl{width: 300px;height: 50px;font-size: 20px;font-weight: bold;}
             </style>
     <body>
+        <h1 align="center"><font color="red">欢迎进入康氏集团官方网页</font></h1>
         <div id="id1">
-        <audio preload="auto" controls >
-            <source src="龙卷风.mp3">
-        </audio>
+        <audio id="myAudio" src="龙卷风.mp3" autoplay></audio>
+        <button onclick="playAudio()" class="ctrl">点击播放音乐</button>
+
+        <script>
+            function playAudio() {
+            const audio = document.getElementById("myAudio");
+            audio.play().catch(e => {
+                console.log("自动播放被阻止:", e);
+            });
+            }
+                document.getElementById("myAudio").addEventListener('canplay', function() {
+                console.log("音频已缓冲足够内容可以播放");
+                });
+        </script>
         </div>
-        <h1 align="center"><font color="red">嘿，你在看啥，眼睛那么大，是猪吗？</font></h1>
+
+        
         <img src="鬼.png" alt="图片无法显示！" width="100%" height="1700px">
-        <h1 align="center">后续精彩，敬请期待</h1>
+        <h1 align="center">敬请期待开发人员后续工作</h1>
     </body>
 </html>  
-
-
-
-
