@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>康氏集团 - 人才招聘</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            background: linear-gradient(rgba(0, 86, 179, 0.8), rgba(0, 123, 255, 0.9)), url('https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #ffc400;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 内容区域 */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #0056b3;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #ffd700;
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* 关于我们 */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+        }
+        
+        .about-image {
+            flex: 1;
+            background-color: #eaeaea;
+            height: 350px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* 职位列表 */
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .job-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border-left: 4px solid #007bff;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .job-card h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .job-card h3 i {
+            margin-right: 10px;
+        }
+        
+        .job-card p {
+            margin-bottom: 8px;
+        }
+        
+        /* 申请表单 */
+        .application-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #0056b3;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* 数据管理面板 */
+        .data-panel {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-top: 40px;
+        }
+        
+        .applications-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .applications-table th,
+        .applications-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .applications-table th {
+            background-color: #f5f9ff;
+            color: #0056b3;
+        }
+        
+        .applications-table tr:hover {
+            background-color: #f9fbfe;
+        }
+        
+        /* 页脚 */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 50px 0 30px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .application-form {
+                padding: 25px;
+            }
+        }
+        
+        /* 成功消息 */
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-building"></i>
+                康氏集团
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">关于我们</a></li>
+                    <li><a href="#jobs">招聘职位</a></li>
+                    <li><a href="#apply">立即申请</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="container">
+            <h1>加入康氏集团，共创美好未来</h1>
+            <p>我们正在寻找有才华、有激情的人才加入我们的团队，共同推动行业发展，实现个人价值。</p>
+            <a href="#apply" class="btn">立即申请</a>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">关于康氏集团</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>康氏集团成立于2005年，是一家多元化发展的企业集团，业务涵盖科技创新、金融服务、房地产开发和健康产业等多个领域。</p>
+                    <p>集团始终秉持"创新、协作、责任、卓越"的核心价值观，致力于为客户提供优质产品和服务，为员工创造发展平台，为社会创造价值。</p>
+                    <p>我们重视人才培养，提供有竞争力的薪酬福利和广阔的职业发展空间，让每一位员工都能在这里实现自己的职业梦想。</p>
+                    <p>集团现有员工5000余人，分支机构遍布全国主要城市，并与多家国际知名企业建立了战略合作伙伴关系。</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80" alt="康氏集团总部">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 招聘职位 -->
+    <section id="jobs" class="section" style="background-color: #f0f8ff;">
+        <div class="container">
+            <h2 class="section-title">招聘职位</h2>
+            <div class="jobs-grid">
+                <div class="job-card">
+                    <h3><i class="fas fa-laptop-code"></i> 高级前端工程师</h3>
+                    <p><strong>工作地点：</strong>北京</p>
+                    <p><strong>经验要求：</strong>3-5年</p>
+                    <p><strong>薪资范围：</strong>20k-35k</p>
+                    <p>负责公司产品的前端开发工作，参与系统架构设计和技术选型。</p>
+                </div>
+                <div class="job-card">
+                    <h3><i class="fas fa-chart-line"></i> 财务分析师</h3>
+                    <p><strong>工作地点：</strong>上海</p>
+                    <p><strong>经验要求：</strong>2-4年</p>
+                    <p><strong>薪资范围：</strong>15k-25k</p>
+                    <p>负责公司财务数据分析，预算编制和财务报告撰写。</p>
+                </div>
+                <div class="job-card">
+                    <h3><i class="fas fa-bullhorn"></i> 市场营销经理</h3>
+                    <p><strong>工作地点：</strong>广州</p>
+                    <p><strong>经验要求：</strong>5年以上</p>
+                    <p><strong>薪资范围：</strong>25k-40k</p>
+                    <p>制定并执行市场营销策略，领导团队完成销售目标。</p>
+                </div>
+                <div class="job-card">
+                    <h3><i class="fas fa-users"></i> 人力资源专员</h3>
+                    <p><strong>工作地点：</strong>深圳</p>
+                    <p><strong>经验要求：</strong>1-3年</p>
+                    <p><strong>薪资范围：</strong>10k-18k</p>
+                    <p>负责招聘、员工关系管理和培训组织等工作。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 申请表单 -->
+    <section id="apply" class="section">
+        <div class="container">
+            <h2 class="section-title">职位申请</h2>
+            <div class="application-form">
+                <div class="success-message" id="successMessage">
+                    感谢您的申请！我们已经收到您的信息，会尽快与您联系。
+                </div>
+                <form id="job-application">
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">电子邮箱</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">联系电话</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="position">申请职位</label>
+                        <select id="position" required>
+                            <option value="">请选择职位</option>
+                            <option value="frontend">高级前端工程师</option>
+                            <option value="finance">财务分析师</option>
+                            <option value="marketing">市场营销经理</option>
+                            <option value="hr">人力资源专员</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">工作经验（年）</label>
+                        <input type="number" id="experience" min="0" max="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">自我介绍</label>
+                        <textarea id="message" placeholder="请简要介绍您的经验、技能和为什么适合这个职位..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">提交申请</button>
+                </form>
+            </div>
+
+            <!-- 数据管理面板 -->
+            <div class="data-panel">
+                <h3>申请数据管理</h3>
+                <p>以下是通过本网站提交的申请信息（存储在浏览器本地）：</p>
+                <button class="btn" id="clearData" style="background: #dc3545; margin: 15px 0;">清除所有数据</button>
+                <table class="applications-table">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>申请职位</th>
+                            <th>经验</th>
+                            <th>联系方式</th>
+                            <th>申请时间</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applicationsTable">
+                        <!-- 数据将通过JavaScript动态填充 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="section" style="background-color: #f0f8ff;">
+        <div class="container">
+            <h2 class="section-title">联系我们</h2>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> 地址</h3>
+                    <p>北京市朝阳区建国路88号康氏大厦</p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-phone"></i> 电话</h3>
+                    <p>010-88889999</p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-envelope"></i> 邮箱</h3>
+                    <p>hr@kang-group.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>关于我们</h3>
+                    <p>康氏集团是一家多元化发展的企业集团，业务涵盖科技创新、金融服务、房地产开发和健康产业等多个领域。</p>
+                </div>
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <p><a href="#about" style="color: #fff;">关于我们</a></p>
+                    <p><a href="#jobs" style="color: #fff;">招聘职位</a></p>
+                    <p><a href="#apply" style="color: #fff;">立即申请</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>关注我们</h3>
+                    <p>
+                        <i class="fab fa-weixin" style="font-size: 24px; margin-right: 15px;"></i>
+                        <i class="fab fa-weibo" style="font-size: 24px; margin-right: 15px;"></i>
+                        <i class="fab fa-linkedin" style="font-size: 24px;"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 康氏集团 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 加载保存的申请数据
+            loadApplications();
+            
+            // 表单提交处理
+            document.getElementById('job-application').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 获取表单数据
+                const application = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    position: document.getElementById('position').value,
+                    experience: document.getElementById('experience').value,
+                    message: document.getElementById('message').value,
+                    timestamp: new Date().toLocaleString()
+                };
+                
+                // 保存申请数据
+                saveApplication(application);
+                
+                // 显示成功消息
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // 重新加载表格数据
+                loadApplications();
+                
+                // 重置表单
+                this.reset();
+                
+                // 滚动到成功消息
+                document.getElementById('successMessage').scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // 3秒后隐藏成功消息
+                setTimeout(function() {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 5000);
+            });
+            
+            // 清除数据按钮
+            document.getElementById('clearData').addEventListener('click', function() {
+                if (confirm('确定要清除所有申请数据吗？此操作不可恢复。')) {
+                    localStorage.removeItem('jobApplications');
+                    loadApplications();
+                }
+            });
+            
+            // 保存申请数据到localStorage
+            function saveApplication(application) {
+                let applications = JSON.parse(localStorage.getItem('jobApplications')) || [];
+                applications.push(application);
+                localStorage.setItem('jobApplications', JSON.stringify(applications));
+            }
+            
+            // 从localStorage加载申请数据并显示在表格中
+            function loadApplications() {
+                const applications = JSON.parse(localStorage.getItem('jobApplications')) || [];
+                const tableBody = document.getElementById('applicationsTable');
+                
+                // 清空表格
+                tableBody.innerHTML = '';
+                
+                // 填充表格
+                if (applications.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">暂无申请数据</td></tr>';
+                } else {
+                    applications.forEach(app => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${app.name}</td>
+                            <td>${app.position}</td>
+                            <td>${app.experience}年</td>
+                            <td>${app.phone}<br>${app.email}</td>
+                            <td>${app.timestamp}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
