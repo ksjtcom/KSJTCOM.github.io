@@ -212,96 +212,14 @@
             </div>
 
         </footer>
-       
-        <script src="https://unpkg.com/@github-likes/likes@1.1.1/dist/index.umd.js">
-            likes('@ksjtcom').render(
-                'like-component-homepage', // 容器 ID
-                {
-                    style: 'circle',
-                    size: 'large',
-                    label: '点赞'
-                }
-            );
-
+        <script>
             document.getElementById('applicationForm').addEventListener('submit',function(e) {
                 e.preventDefault();
                 alert("感谢您的申请！我们会尽快审核您的材料并与您联系。");
                 this.reset();
             });    
         </script>
-
-        <script>
-            // 收集访问信息
-            const visitData = {
-                url: window.location.href,
-                timestamp: new Date().toISOString(),
-                referrer: document.referrer || '直接访问',
-                userAgent: navigator.userAgent
-            };
-    
-            // GitHub仓库信息（需要替换为你自己的信息）
-            const owner = 'ksjtcom';
-            const repo = 'ksjtcom.github.io';
-            const path = 'ksjtcom.github.io/visits.txt'; // 存储访问记录的文件路径
-            const token = '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'; // 注意：在实际生产环境中，前端直接暴露令牌非常不安全！
-    
-            // 由于前端直接使用PAT存在严重安全风险，以下代码仅作概念演示
-            // 实际部署应通过自家服务器或云函数中转请求，保护令牌
-            async function saveVisitToGitHub() {
-                try {
-                    // 尝试获取现有文件内容（如果有的话）
-                    const existingContentResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
-                        headers: {
-                            'Authorization': `token ${token}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
-                    });
-    
-                    let existingContent = '';
-                    let sha = null;
-    
-                    if (existingContentResponse.ok) {
-                        const existingFile = await existingContentResponse.json();
-                        existingContent = decodeURIComponent(escape(atob(existingFile.content))); // 解码Base64内容
-                        sha = existingFile.sha;
-                    }
-    
-                    // 解析现有JSON数组或创建新数组
-                    const visitsArray = existingContent ? JSON.parse(existingContent) : [];
-                    // 将新的访问数据添加到数组
-                    visitsArray.push(visitData);
-    
-                    // 准备提交的新内容（转换为Base64）
-                    const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(visitsArray, null, 2)))); // 编码为Base64
-    
-                    // 提交（创建或更新文件）
-                    const updateResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Authorization': `token ${token}`,
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/vnd.github.v3+json'
-                        },
-                        body: JSON.stringify({
-                            message: 'Add new visit record', // 提交信息
-                            content: newContent,
-                            sha: sha // 更新时需要提供sha
-                        })
-                    });
-    
-                    const result = await updateResponse.json();
-                    console.log('Data saved to GitHub:', result);
-                } catch (error) {
-                    console.error('Error saving to GitHub:', error);
-                }
-            }
-    
-            // 调用函数保存访问记录
-            saveVisitToGitHub();
-        </script>
-
-
     </body>
-
 </html>
+
 
